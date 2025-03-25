@@ -1,15 +1,15 @@
-// pages/blog/[slug]/page.tsx
-
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { fetchPostById } from '../../api/posts';
-import Head from 'next/head'; // Импортируем компонент Head для SEO
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { fetchPostById } from "../../api/posts";
+import Head from "next/head";
+import { Post } from "@/app/store/blogStore";
+import { motion } from "framer-motion";
 
 const PostPage = () => {
-    const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [post, setPost] = useState<Post | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const { slug } = useParams();
 
@@ -21,11 +21,10 @@ const PostPage = () => {
                 setLoading(true);
                 setError(null);
 
-                const postData = await fetchPostById(slug);
+                const postData = await fetchPostById(Number(slug));
                 setPost(postData);
             } catch (error) {
-                setError('Ошибка при загрузке поста. Попробуйте позже.');
-                console.error('Error fetching post:', error);
+                setError("Ошибка при загрузке поста. Попробуйте позже.");
             } finally {
                 setLoading(false);
             }
@@ -47,9 +46,9 @@ const PostPage = () => {
     }
 
     return (
-        <div className="min-h-screen p-4">
+        <div className="min-h-screen p-6 md:p-12 max-w-4xl mx-auto">
             <Head>
-                <title>{post.title} - My Blog</title>
+                <title>{post.title}</title>
                 <meta name="description" content={post.body.substring(0, 150)} />
                 <meta name="keywords" content="blog, post, next.js, react" />
                 <meta property="og:title" content={post.title} />
@@ -57,8 +56,21 @@ const PostPage = () => {
                 <meta property="og:image" content="https://via.placeholder.com/500" />
             </Head>
 
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-            <p className="text-lg">{post.body}</p>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-center text-foreground">
+                    {post.title}
+                </h1>
+                <div className="flex justify-center mb-8 text-sm text-gray-500 dark:text-gray-400">
+                    <p>Автор: Пользователь #{post.userId} | ID поста: {post.id}</p>
+                </div>
+                <article className="prose dark:prose-invert max-w-none text-lg leading-relaxed">
+                    <p>{post.body}</p>
+                </article>
+            </motion.div>
         </div>
     );
 };

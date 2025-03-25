@@ -1,13 +1,29 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { Post } from "../store/blogStore";
 
-export function PostCard({ post }: { post: any }) {
+type PostCardProps = {
+    post: Post;
+};
+
+export const PostCard = ({ post }: PostCardProps) => {
     return (
-        <div className="border p-4 rounded shadow hover:shadow-lg transition">
-            <h2 className="text-xl font-semibold">{post.title}</h2>
-            <p className="text-sm text-gray-600 mt-2">{post.body.substring(0, 80)}...</p>
-            <Link href={`/blog/${post.id}`}>
-                <span className="text-blue-500 hover:underline mt-4 inline-block">Read more</span>
+        <motion.div
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="p-5 rounded-2xl shadow-card border bg-card hover:shadow-xl transition-colors duration-300"
+        >
+            <h2 className="text-2xl font-bold mb-3 text-foreground">{post.title}</h2>
+            <p className="text-base text-gray-600 dark:text-gray-300 mb-4">
+                {post.body.slice(0, 100)}...
+            </p>
+            <Link
+                href={`/blog/${post.id}`}
+                className="text-primary hover:underline font-semibold"
+            >
+                Читать далее →
             </Link>
-        </div>
+        </motion.div>
     );
-}
+};

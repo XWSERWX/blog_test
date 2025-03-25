@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project README
 
-## Getting Started
+## Table of Contents
+- [How to Setup and Run](#how-to-setup-and-run)
+- [Assumptions or Limitations](#assumptions-or-limitations)
+- [API Integrations](#api-integrations)
+- [Deployment](#deployment)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How to Setup and Run
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Prerequisites
+Before setting up the project, make sure you have the following installed:
+- **Node.js** (version 16 or higher)
+  [Download Node.js](https://nodejs.org/)
+- **npm** (comes with Node.js) 
+  If you prefer Yarn, feel free to install it globally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repository:
+   `git clone https://github.com/XWSERWX/blog_test.git`
+   `cd your-project`
 
-## Learn More
+2. Install dependencies:
+   Using npm:
+   `npm install`
+   Or using Yarn:
+   `yarn install`
 
-To learn more about Next.js, take a look at the following resources:
+3. Set up environment variables:
+   Create a `.env.local` file at the root of the project and add your configuration (e.g., API keys or database credentials). You can find the required variables in the `.env.example` file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the project:
+   Start the development server:
+   Using npm:
+   `npm run dev`
+   Or using Yarn:
+   `yarn dev`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Assumptions or Limitations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- This project assumes that you are using a modern version of Node.js (v16 or higher).
+- The project uses React and Next.js, so familiarity with these technologies is required.
+- The backend is integrated with third-party APIs like JSONPlaceholder, so internet access is needed for API calls to function.
+- The project is currently intended to be run in a development environment. Deployment instructions are provided in a separate section.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## API Integrations
+
+The project integrates with JSONPlaceholder for fetching and displaying blog posts. The API endpoints being used are as follows:
+- **GET /posts**: Fetches a list of all blog posts.
+- **GET /posts/{id}**: Fetches a specific post by its ID, using the dynamic route `[slug]`.
+
+Ensure that the API calls are correctly handled by Axios in the `api` directory. Each call corresponds to a specific component or page that uses the fetched data.
+
+---
+
+## Deployment
+
+1. **Build the application**:
+   To build the application for production, run:
+   `npm run build`
+   Or using Yarn:
+   `yarn build`
+
+2. **Deploy**:
+    The application is available at:
+   `https://blog-test.vercel.app`.
