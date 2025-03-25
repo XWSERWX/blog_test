@@ -24,7 +24,7 @@ const PostPage = () => {
                 const postData = await fetchPostById(Number(slug));
                 setPost(postData);
             } catch (error) {
-                setError("Ошибка при загрузке поста. Попробуйте позже.");
+                setError(`Ошибка при загрузке поста. Попробуйте позже. ${error}`);
             } finally {
                 setLoading(false);
             }

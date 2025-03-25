@@ -70,4 +70,4 @@ Ensure that the API calls are correctly handled by Axios in the `api` directory.
 
 2. **Deploy**:
     The application is available at:
-   `https://blog-test.vercel.app`.
+   `https://xwserwxblog.vercel.app`.
